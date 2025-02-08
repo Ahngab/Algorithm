@@ -1,4 +1,7 @@
-import math
-a, b = map(int, input().split())
-print(math.gcd(a, b))
-print(int(a*b/math.gcd(a,b)))
+import math, sys
+
+input = sys.stdin.readline
+A, B = map(int, input().split())
+gcd = math.gcd(A, B)
+print(gcd)
+print((A*B)//gcd)
