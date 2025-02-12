@@ -1,12 +1,19 @@
 import sys
+from collections import deque
 
-N = int(sys.stdin.readline())
-data = list(map(int, sys.stdin.readline().split()))
-result = [-1]*N
-stack = []
 
-for i in range(N):
-    while stack and data[stack[-1]] < data[i]:
-        result[stack.pop()] = data[i]
+input = sys.stdin.readline
+N = int(input())
+arr = list(map(int, input().split()))
+NGE = [-1] * len(arr)
+stack = deque()
+stack.append(0)
+
+for i in range(len(arr)):
+    while stack and arr[i] > arr[stack[-1]]:
+        NGE[stack.pop()] = arr[i]
+
     stack.append(i)
-print(*result)
+
+print(*NGE, sep=" ")
+#    i love you
