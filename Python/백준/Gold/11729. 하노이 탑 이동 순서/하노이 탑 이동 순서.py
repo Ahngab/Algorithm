@@ -1,15 +1,17 @@
 import sys
+sys.setrecursionlimit(10**6)
 
-#N 옮길 판, 시작, 어디
-def hanoi(N, start, assi, end):
-    if N == 1:
-        print(start, end)
-        return
-    hanoi(N-1, start, end, assi)
-    print(start, end)
-    hanoi(N-1, assi, start, end)
-
-input = sys.stdin.readline
 N = int(input())
-print(2**N -1)
-hanoi(N, 1, 2, 3)
+
+def hanoi(n, start, end, assi):
+    if n == 1:
+        print(start, end)
+
+    else:
+        hanoi(n-1, start, assi, end)
+        print(start, end)
+        hanoi(n-1, assi, end, start)
+
+print(2**N - 1)
+hanoi(N, 1, 3, 2)
+        
