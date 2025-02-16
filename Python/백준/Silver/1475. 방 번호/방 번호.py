@@ -1,15 +1,17 @@
 import sys
 
-numCnt = [0] * 10
+input = sys.stdin.readline
+numCnt = [0] * 9
+N = list(map(int, list(input().strip())))
 
-N = list(map(int, list(input())))
 for i in N:
-    if i == 6 or i == 9:
-        if numCnt[6] <= numCnt[9]:
-            numCnt[6] += 1
-        else:
-            numCnt[9] += 1
+    if i == 9:
+        numCnt[6] += 1
     else:
         numCnt[i] += 1
 
+if numCnt[6] % 2 == 0:
+    numCnt[6] //= 2
+else:
+    numCnt[6] = int(numCnt[6]/2) + 1
 print(max(numCnt))
