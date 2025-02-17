@@ -1,21 +1,22 @@
-#while True 보통 쓰면 time exceed 뜨니깐 while문에 조건 달아야함.
-#이분탐색 문제인듯
-import sys
+N, M  = map(int, input().split())
+trees = list(map(int, input().split()))
+total = sum(trees)
+num = len(trees)
 
-N, need = map(int, sys.stdin.readline().split())
-trees = list(map(int, sys.stdin.readline().split()))
+min_ = 0
+max_ = max(trees)
+res = 0
 
-max_height = max(trees)
-min_height = 0
-
-while min_height <= max_height:
-    num = (max_height + min_height) // 2
+while min_ <= max_:
+    mid = (min_ + max_) // 2
     cut = 0
-    for i in trees:
-        if i > num:
-            cut += i - num
-    if cut < need:
-        max_height = num - 1
-    elif cut >= need:
-        min_height = num + 1
-print(max_height)
+    for tree in trees:
+        if mid < tree:
+            cut += tree - mid
+
+    if cut >=M:
+        res = mid
+        min_ = mid + 1
+    else:
+        max_ = mid - 1
+print(res)
