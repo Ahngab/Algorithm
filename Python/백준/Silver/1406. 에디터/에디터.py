@@ -1,19 +1,26 @@
 import sys
+from collections import deque
 
-stack_l = list(input())
-stack_r = []
-n = int(input())
+input = sys.stdin.readline
+stack_l = deque(list(input().strip()))
+stack_r = deque()
 
-for i in range(n):
-    command = sys.stdin.readline().split()
+N = int(input())
 
-    if command[0] == "L" and stack_l:
-        stack_r.append(stack_l.pop())
-    elif command[0] == "D" and stack_r:
-        stack_l.append(stack_r.pop())
-    elif command[0] == "B" and stack_l:
+for _ in range(N):
+    order = input().split()
+    cmd = order[0]
+
+    if cmd == "L" and stack_l:
+        stack_r.appendleft(stack_l.pop())
+        
+    elif cmd == "D" and stack_r:
+        stack_l.append(stack_r.popleft())
+    
+    elif cmd == "B" and stack_l:
         stack_l.pop()
-    elif command[0] == "P":
-        stack_l.append(command[1])
+        
+    elif cmd == "P":
+        stack_l.append(order[1])
 
-print("".join(stack_l + list(reversed(stack_r))))
+print("".join(stack_l) + "".join(stack_r))
