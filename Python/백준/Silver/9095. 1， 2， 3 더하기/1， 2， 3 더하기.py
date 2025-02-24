@@ -1,21 +1,14 @@
-import heapq, sys
+import sys
 
-def find(n, N):
-    global answer
-    if n == N:
-        answer +=1
-    
-    for i in range(1, 4):
-        if n + i <= N:
-            find(n + i, N)
+n = 11
+dp = [0] * (n + 1)
+dp[:4] = [0, 1, 2, 4]
 
-
-
+for i in range(4, n + 1):
+    dp[i] = dp[i-1] + dp[i-2] + dp[i-3]
 
 T = int(input())
 
 for _ in range(T):
-    N = int(input())
-    answer = 0
-    find(0, N)
-    print(answer)
+    n = int(input())
+    print(dp[n])
